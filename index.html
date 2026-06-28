@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Artist Name</title>
+  <link rel="stylesheet" href="resources/css/styles.css">
+</head>
+<body>
+  <main class="page">
+
+    <header class="site-header">
+      <div class="logo-strip">
+        <img src="resources/images/Cillek.png" alt="Artist logo">
+      </div>
+    </header>
+
+
+<!-- Featured Video-->   
+<section class="featured-video">
+  <div class="video-frame">
+    <video controls poster="resources/images/DPS-Healer.png">
+      <source src="resources/videos/videoplayback.mp4" type="video/mp4">
+    </video>
+  </div>
+</section>
+
+<!--Section 2 Icons-->
+<section class="social-links">
+  <div class="social-split">
+
+<div class="social-triad">
+  <a class="social-icon" href="#" aria-label="YouTube"><!-- yt --></a>
+  <a class="social-icon" href="#" aria-label="Instagram"><!-- ig --></a>
+  <a class="social-icon" href="#" aria-label="TikTok"><!-- tt --></a>
+</div>
+
+    <a class="bandcamp-card" href="BANDCAMP_URL">
+      <img src="resources/images/Album.jpg" alt="Bandcamp">
+      <div class="bandcamp-card-body">
+        <span class="bandcamp-card-title">Listen on Bandcamp</span>
+        <span class="bandcamp-card-sub">Stream & buy the latest release</span>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<hr class="divider">
+
+<!--Section 3 + 4: Player left, tracks + buttons right-->
+<div class="desktop-split">
+
+  <section class="music-player">
+    <div class="player">
+      <img class="player-cover" src="" alt="Cover art">
+      <div class="player-body">
+        <div class="player-top">
+          <div>
+            <p class="player-title">—</p>
+            <p class="player-artist">—</p>
+          </div>
+          <button class="player-toggle" aria-label="Play">▶</button>
+        </div>
+        <div class="progress"><div class="progress-fill"></div></div>
+        <div class="times">
+          <span class="time-current">0:00</span>
+          <span class="time-total">0:00</span>
+        </div>
+      </div>
+    </div>
+    <audio></audio>
+  </section>
+
+  <div class="right-col">
+    <ul class="track-list"></ul>
+    <section class="support">
+      <a class="btn btn-primary" href="PAYPAL_URL">Donate · PayPal</a>
+      <a class="btn btn-outline" href="BANDCAMP_URL">Buy now · Bandcamp</a>
+    </section>
+  </div>
+
+</div>
+
+
+  </main>
+  <script src="resources/js/script.js"></script>
+</body>
+</html>
