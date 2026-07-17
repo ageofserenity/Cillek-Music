@@ -176,7 +176,7 @@ section { margin-bottom: 2rem; }
 
 .intro {
   width: 100%;
-  max-width: 75%;
+  max-width: 85%;
   margin: 0 auto;
   text-align: left;
   margin-bottom: 5rem;
@@ -408,6 +408,11 @@ section { margin-bottom: 2rem; }
   .logo-strip { 
     aspect-ratio: 7 / 1; 
   }
+
+
+  .intro {
+  max-width: 75%;
+}
 
 
   /* Section 2: row — bandcamp left, icons right, capped + centered */
