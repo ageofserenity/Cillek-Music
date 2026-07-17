@@ -90,11 +90,25 @@ textarea:not([rows]) {
   --accent:    var(--pink);
 }
 
+@font-face {
+  font-family: "Fraunces";
+  src: url("resources/fonts/Fraunces_72pt_Soft-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Fraunces";
+  src: url("resources/fonts/Fraunces_72pt_Soft-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+}
+
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
   color: var(--text);
-  font-family: system-ui, sans-serif;
+  font-family: "Fraunces", serif;
   line-height: 1.5;
   min-height: 100vh;
   overflow-x: hidden;
@@ -125,8 +139,9 @@ body::after {
 section { margin-bottom: 2rem; }
 
 .section-heading {
+  font-family: "Fraunces", Georgia, serif; ;
   font-size: 2rem;
-  font-weight: 500;
+  font-weight: 600;
   color: var(--white);
   margin-bottom: 1.5rem;
   text-align: center;
@@ -182,8 +197,9 @@ section { margin-bottom: 2rem; }
 }
 
 .intro-title {
-  font-size: 2.4rem;
-  font-weight: 500;
+  font-family: "Fraunces", Georgia, serif; 
+  font-size: 2rem;
+  font-weight: 600;
   color: var(--white);
   line-height: 1.15;
   margin-bottom: 1rem;
@@ -221,8 +237,9 @@ section { margin-bottom: 2rem; }
 }
 
 .social-copy h2 {
+  font-family: "Fraunces", Georgia, serif; 
   font-size: 2rem;
-  font-weight: 500;
+  font-weight: 600;
   color: var(--white);
   margin-bottom: 0.75rem;
 }
