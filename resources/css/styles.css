@@ -163,7 +163,7 @@ section { margin-bottom: 2rem; }
 /* ============ Section 2: socials + bandcamp ============ */
 .social-split {
   display: flex;
-  flex-direction: column;   /* MOBILE: stacked */
+  flex-direction: column-reverse;   /* MOBILE: icons on top, bandcamp below */
   align-items: center;
   gap: 2rem;
 }
