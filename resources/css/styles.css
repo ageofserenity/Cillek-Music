@@ -173,9 +173,6 @@ section { margin-bottom: 2rem; }
   height: auto;
 }
 
-.bandcamp-card { order: 1; } /* bandcamp on top (mobile) */
-.social-left   { order: 2; }
-
 .social-left {
   display: flex;
   flex-direction: column;
@@ -386,8 +383,8 @@ section { margin-bottom: 2rem; }
     max-width: 75%;
     margin: 0 auto;
   }
-  .bandcamp-card { order: 1; flex: 1; }              /* left, grows/shrinks */
-  .social-left   { order: 2; flex: 1; align-self: flex-start; }
+  .bandcamp-card { flex: 1; }              /* left */
+  .social-left   { flex: 1; align-self: flex-start; }
   .social-copy   { text-align: left; }
   .video-frame {
     max-width: 75%;
