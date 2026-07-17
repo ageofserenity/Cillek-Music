@@ -1,4 +1,3 @@
-
 /* Box sizing rules */
 *,
 *::before,
@@ -145,11 +144,12 @@ section { margin-bottom: 2rem; }
 
 .video-frame {
   width: 100%;
+  max-width: 90%;
+  margin: 0 auto;
+  aspect-ratio: 16 / 9;
   border-radius: 10px;
   overflow: hidden;
   background: var(--black);
-  align-items: center;
-  margin: 0 auto;
 }
 
 .video-frame video {
@@ -160,43 +160,57 @@ section { margin-bottom: 2rem; }
   margin: 0 auto;
 }
 
+/* ============ Section 2: socials + bandcamp ============ */
+.social-split {
+  display: flex;
+  flex-direction: column;   /* MOBILE: stacked */
+  align-items: center;
+  gap: 2rem;
+}
+
+.social-icon img {
+  width: clamp(60px, 10vw, 95px);
+  height: auto;
+}
+
+.bandcamp-card { order: 1; } /* bandcamp on top (mobile) */
+.social-left   { order: 2; }
+
+.social-left {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.social-copy {
+  max-width: 40ch;
+  text-align: justify;
+}
+
+.social-copy h2 {
+  font-size: 2rem;
+  font-weight: 500;
+  color: var(--white);
+  margin-bottom: 0.75rem;
+}
+
+.social-copy p {
+  color: var(--text-soft);
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
 .social-triad {
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  gap: 3.5rem;
-}
-
-.social-row { display: flex; gap: 2.5rem; }
-
-.social-icon {
-  width: 75px;
-  height: 75px;
-  border-radius: 50%;
-  background: var(--accent);
-  color: var(--white);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.social-icon svg { width: 28px; height: 28px; fill: currentColor; }
-
-.social-split {
-  display: flex;
-  flex-direction: column;
   align-items: center;
   gap: 1.5rem;
 }
 
-.bandcamp-card { order: 1; }
-.social-triad  { order: 2; }
-
 .bandcamp-card {
   display: block;
   width: 100%;
-  max-width: 375px;
+  max-width: 340px;
   background: #3A3A37;
   border-radius: 10px;
   overflow: hidden;
@@ -205,8 +219,7 @@ section { margin-bottom: 2rem; }
 }
 
 .bandcamp-card img {
-  width: 100%;       /* fixed height — stops it growing taller as the card widens */
-  aspect-ratio: auto;   /* kills the square rule that was forcing height up */
+  width: 100%;
   object-fit: cover;
   display: block;
 }
@@ -348,7 +361,7 @@ section { margin-bottom: 2rem; }
 
 /*Desktop Version*/
 
-@media (min-width: 760px) {
+@media (min-width: 720px) {
   
   .page {
     max-width: 1250px;
@@ -362,28 +375,22 @@ section { margin-bottom: 2rem; }
     aspect-ratio: 7 / 1; 
   }
 
-.social-triad {
+
+  /* Section 2: row — bandcamp left, icons right, capped + centered */
+  .social-split {
+    display: flex;
     flex-direction: row;
-  }
-
-  .bandcamp-card {
-  width: 30%;
-  max-width: 100%;
-  }
-
-
-.social-split {
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
-    gap: 5rem;
+    justify-content: center;
+    gap: 2.5rem;
+    max-width: 75%;
+    margin: 0 auto;
   }
-
-  .social-triad  { order: 2; }
-  .bandcamp-card { order: 1; }
-
+  .bandcamp-card { order: 1; flex: 1; }              /* left, grows/shrinks */
+  .social-left   { order: 2; flex: 1; align-self: flex-start; }
+  .social-copy   { text-align: left; }
   .video-frame {
-    max-width: 1150px;
+    max-width: 75%;
     margin: 0 auto;        /* centers it */
   }
 
