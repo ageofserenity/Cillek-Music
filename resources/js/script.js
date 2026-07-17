@@ -89,3 +89,83 @@ progress.addEventListener("click", (e) => {
 
 // --- Load the first track on page load ---
 loadTrack(0);
+
+
+// --- Scroll reveal (fade-in-up as sections enter view) ---
+const revealEls = document.querySelectorAll(".reveal");
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("visible");
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.15 });
+revealEls.forEach((el) => revealObserver.observe(el));
+
+// --- Intro effect: waveform beat-pulse that settles into the background ---
+window.addEventListener("load", function () {
+  const canvas = document.createElement("canvas");
+  Object.assign(canvas.style, { position: "fixed", inset: "0", width: "100%", height: "100%", zIndex: "10000", pointerEvents: "none", transition: "opacity 0.9s ease" });
+  document.body.appendChild(canvas);
+  const ctx = canvas.getContext("2d");
+  const dpr = window.devicePixelRatio || 1;
+  let W, H;
+  function resize() { W = canvas.width = window.innerWidth * dpr; H = canvas.height = window.innerHeight * dpr; }
+  resize();
+  window.addEventListener("resize", resize);
+
+  const PINK = "236,121,159";
+  const start = performance.now();
+  const DURATION = 2600;
+
+  // beat pattern: [time in ms, hit strength 0..1]
+  const beats = [
+    [300, 1.0],   // HIT
+    [750, 0.4],   // small hit
+    [1150, 1.0],  // HIT
+    [1550, 0.35], // small hit
+    [1950, 1.0]   // HIT
+  ];
+
+  // current envelope value from the beats (a hit spikes, then decays)
+  function envelope(t) {
+    let v = 0.12; // quiet baseline
+    for (let i = 0; i < beats.length; i++) {
+      const bt = beats[i][0], strength = beats[i][1];
+      if (t >= bt) {
+        const decay = Math.exp(-(t - bt) / 220); // how fast each hit fades
+        v = Math.max(v, strength * decay);
+      }
+    }
+    return v;
+  }
+
+  const BAR_W = 1 * dpr;
+  const GAP = 5 * dpr;
+
+  function draw(now) {
+    const t = now - start;
+    ctx.fillStyle = "#1F1D1C";
+    ctx.fillRect(0, 0, W, H);
+
+    const level = envelope(t);
+    const midY = H / 2;
+    const step = BAR_W + GAP;
+    const count = Math.ceil(W / step);
+
+    for (let i = 0; i < count; i++) {
+      const x = i * step;
+      // vary each bar a bit so it reads like a real waveform, not a flat block
+      const variance = 0.4 + 0.6 * Math.abs(Math.sin(i * 0.35));
+      const jitter = 0.85 + Math.random() * 0.3;
+      const h = level * variance * jitter * (H * 0.42);
+      ctx.fillStyle = "rgba(" + PINK + "," + (0.35 + level * 0.5) + ")";
+      ctx.fillRect(x, midY - h, BAR_W, h * 2);
+    }
+
+    if (t < DURATION) { requestAnimationFrame(draw); }
+    else { canvas.style.opacity = "0"; setTimeout(function () { canvas.remove(); }, 900); }
+  }
+  requestAnimationFrame(draw);
+});

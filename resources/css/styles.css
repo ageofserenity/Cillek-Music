@@ -455,3 +455,14 @@ section { margin-bottom: 2rem; }
   }
 
 }
+
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 1.4s ease, transform 1.4s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translatey(0);
+}
