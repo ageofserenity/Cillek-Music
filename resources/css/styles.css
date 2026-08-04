@@ -1,180 +1,189 @@
-/* Box sizing rules */
+/* ========================================
+   RESET — Modern CSS Reset
+   ======================================== */
+
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
 
-/* Prevent font size inflation */
 html {
   -moz-text-size-adjust: none;
   -webkit-text-size-adjust: none;
   text-size-adjust: none;
 }
 
-/* Remove default margin in favour of better control in authored CSS */
 body, h1, h2, h3, h4, p,
 figure, blockquote, dl, dd {
   margin-block-end: 0;
 }
 
-/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
 ul[role='list'],
 ol[role='list'] {
   list-style: none;
 }
 
-/* Set core body defaults */
 body {
   min-height: 100vh;
   line-height: 1.5;
 }
 
-/* Set shorter line heights on headings and interactive elements */
 h1, h2, h3, h4,
 button, input, label {
   line-height: 1.1;
 }
 
-/* Balance text wrapping on headings */
 h1, h2,
 h3, h4 {
   text-wrap: balance;
 }
 
-/* A elements that don't have a class get default styles */
 a:not([class]) {
   text-decoration-skip-ink: auto;
   color: currentColor;
 }
 
-/* Make images easier to work with */
 img,
 picture {
   max-width: 100%;
   display: block;
 }
 
-/* Inherit fonts for inputs and buttons */
 input, button,
 textarea, select {
   font-family: inherit;
   font-size: inherit;
 }
 
-/* Make sure textareas without a rows attribute are not tiny */
 textarea:not([rows]) {
   min-height: 10em;
 }
 
-/* Anything that has been anchored to should have extra scroll margin */
 :target {
   scroll-margin-block: 5ex;
 }
 
-/*//////////////////////////////////////////////////////*/
-/*//////////////////////////////////////////////////////*/
-/*//////////////////////////////////////////////////////*/
 
-/*Website Starts Here*/
+/* ========================================
+   CUSTOM PROPERTIES
+   ======================================== */
 
 :root {
-  --pink:  #EC799F;
-  --ash:   #857F7A;
-  --black: #2C2C2A;
-  --white: #FFFFFF;
+  --pink:      #EC799F;
+  --ash:       #857F7A;
+  --black:     #2C2C2A;
+  --dark:      #363732;
+  --card:      #363732;
+  --card-line: #4A4A46;
+  --white:     #FFFFFF;
 
-  --bg:        var(--black);
+  --bg:        var(--dark);
   --text:      var(--white);
   --text-soft: var(--ash);
   --accent:    var(--pink);
+
+  --font-display: "Fraunces", Georgia, serif;
+  --font-body:    "Fraunces", Georgia, serif;
 }
+
+
+/* ========================================
+   FONTS
+   ======================================== */
 
 @font-face {
   font-family: "Fraunces";
-  src: url("resources/fonts/Fraunces_72pt_Soft-Regular.ttf") format("truetype");
+  src: url("../fonts/static/Fraunces_72pt_Soft-Regular.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
   font-family: "Fraunces";
-  src: url("resources/fonts/Fraunces_72pt_Soft-SemiBold.ttf") format("truetype");
+  src: url("../fonts/static/Fraunces_72pt_Soft-SemiBold.ttf") format("truetype");
   font-weight: 600;
   font-style: normal;
+  font-display: swap;
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* ========================================
+   BASE / BODY — Gradient Background
+   ======================================== */
 
 body {
+  margin: 0;
+  padding: 0;
   color: var(--text);
-  font-family: "Fraunces", serif;
+  font-family: var(--font-body);
   line-height: 1.5;
-  min-height: 100vh;
   overflow-x: hidden;
-  background-color: #1F1D1C;
-  background-image:
-    radial-gradient(115% 70% at 50% -3%, rgba(236, 121, 159, 0.4), transparent 75%),
-    radial-gradient(130% 120% at 50% 115%, rgba(0, 0, 0, 0.55), transparent 60%);
-  background-attachment: fixed;
+
+  /* Smooth pink-to-dark gradient — no shape, just a vertical fade */
+  background: linear-gradient(
+    to bottom,
+    var(--pink),
+    var(--dark)
+  ) fixed;
 }
 
-body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 9999;
-  opacity: 0.06;
-  mix-blend-mode: overlay;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
 
-.page {
-  width: 100%;
-  max-width: 650px;
-  margin: 0 auto;
-}
+/* ========================================
+   SECTION 1: HERO
+   ======================================== */
 
-section { margin-bottom: 2rem; }
-
-.section-heading {
-  font-family: "Fraunces", Georgia, serif; ;
-  font-size: 2rem;
-  font-weight: 600;
-  color: var(--white);
-  margin-bottom: 1.5rem;
-  text-align: center;
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .site-header {
-  width: 100vw;
-  position: relative;
-  left: 50%;
-  margin-left: -50vw;
-  margin-top: -1.25rem;
-  margin-bottom: 2rem;
+  padding: 1.5rem 1.5rem 1rem;
 }
 
-.logo-strip img {
-  width: 100%;
-  height: 85%;
-  object-fit: cover;
-  margin: 0 auto;
-  margin-top: 25px;
+.site-header img {
+  width: 100%;             /* Let it shrink down smoothly on small screens */
+  max-width: 400px;        /* Keeps your intended cap on larger screens */
+  height: auto;
+  margin-inline: auto;
+  display: block;          /* Prevents inline element spacing issues */
 }
 
-.featured-video{
-  margin-bottom: 40px;
+/* Dark card fills remaining space */
+.hero-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  background: var(--card);
+  padding: 2rem 1.5rem;
+  flex: 1;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-weight: 400;
+  color: var(--text);
+  margin: 0 0 1rem;
+}
+
+.hero-copy {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: var(--text);
+  line-height: 1.7;
+  margin: 0 0 1rem;
 }
 
 .video-frame {
   width: 100%;
-  max-width: 100%;
-  margin: 0 auto;
   aspect-ratio: 16 / 9;
-  /*border-radius: 10px;*/
   overflow: hidden;
+  border-radius: 5px;
   background: var(--black);
 }
 
@@ -182,123 +191,136 @@ section { margin-bottom: 2rem; }
   width: 100%;
   height: 100%;
   display: block;
-  align-items: center;
-  margin: 0 auto;
+  object-fit: cover;
 }
 
-/* ============ Intro/About ============ */
 
-.intro {
-  width: 100%;
-  max-width: 90%;
-  margin: 0 auto;
-  text-align: left;
-  margin-bottom: 5rem;
-}
+/* ========================================
+   SECTION 2: BANDCAMP
+   ======================================== */
 
-.intro-title {
-  font-family: "Fraunces", Georgia, serif; 
-  font-size: 2rem;
-  font-weight: 600;
-  color: var(--white);
-  line-height: 1.15;
-  margin-bottom: 1rem;
-}
-
-.intro-text {
-  color: var(--text-soft);
-  font-size: 1.1rem;
-  line-height: 1.7;
-  text-align: justify;
-}
-
-/* ============ Section 2: socials + bandcamp ============ */
-.social-split {
+.bandcamp {
+  min-height: 100vh;
   display: flex;
-  flex-direction: column-reverse;   /* MOBILE: icons on top, bandcamp below */
-  align-items: center;
+  flex-direction: column;
+  padding: 2rem 1.5rem;
+  margin-top: 50px;
+}
+
+
+/* Mobile: album grid on top, text below */
+.bandcamp-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.bandcamp-text{
+  margin-left: 5%;
+}
+
+.bandcamp-title {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-weight: 400;
+  color: var(--text);
+  margin: 0 0 0.75rem;
+}
+
+.bandcamp-copy {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: var(--text);
+  line-height: 1.7;
+  margin: 0 0 1.25rem;
+}
+
+.btn-buy {
+  display: inline-block;
+  background: var(--card);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 400;
+  text-decoration: none;
+  padding: 0.5rem 1.5rem;
+  border-radius: 5px;
+}
+
+/* 2x2 album grid — centered on mobile, compact */
+.album-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.35rem;
+  width: 90%;
+  margin-inline: auto;
+}
+
+.album-grid img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+/* Social icons row at bottom */
+.social-icons {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  padding-top: 80px;
+}
+
+.social-icons a {
+  display: block;
+}
+
+.social-icons img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+
+/* ========================================
+   SECTION 3: FM MUSIC (from original)
+   ======================================== */
+
+.music-section {
+  max-width: 100%;
+  width: 85%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 1.5rem;
+  margin-inline: auto
+}
+
+
+.desktop-split {
+  display: flex;
+  flex-direction: column;
   gap: 2rem;
 }
 
-.social-icon img {
-  width: clamp(60px, 10vw, 95px);
-  height: auto;
-}
-
-.social-left {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-.social-copy {
-  max-width: 40ch;
-  text-align: justify;
-}
-
-.social-copy h2 {
-  font-family: "Fraunces", Georgia, serif; 
+.section-heading {
+  font-family: var(--font-display);
   font-size: 2rem;
   font-weight: 600;
   color: var(--white);
-  margin-bottom: 0.75rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
 }
 
-.social-copy p {
-  color: var(--text-soft);
-  font-size: 1.05rem;
-  line-height: 1.6;
-}
-
-.social-triad {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 1.5rem;
-}
-
-.bandcamp-card {
-  display: block;
-  width: 100%;
-  max-width: 340px;
-  background: #3A3A37;
-  border-radius: 10px;
-  overflow: hidden;
-  text-decoration: none;
-  color: var(--white);
-}
-
-.bandcamp-card img {
-  width: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.bandcamp-card-body {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-  padding: 0.85rem;
-}
-
-.bandcamp-card-title { font-weight: 500; }
-.bandcamp-card-sub   { font-size: 0.8rem; color: var(--text-soft); }
-
-
-
-  .divider {
-  border: 0;
-  height: 1px;
-  background: var(--ash);
-  opacity: 0.3;
-  margin: 2.5rem 0;
+h2.section-heading{
+  margin-bottom: 50px;
 }
 
 .player {
   width: 100%;
   max-width: 85%;
   display: flex;
-  margin: 0 auto;   
+  margin: 0 auto;
   flex-direction: column;
   gap: 0.75rem;
   background: #3A3A37;
@@ -309,12 +331,10 @@ section { margin-bottom: 2rem; }
 .player-cover {
   width: 100%;
   max-width: 85%;
-  object-fit: fill;     /* the key — crops instead of distorting */
+  object-fit: fill;
   border-radius: 8px;
   align-self: center;
 }
-
-
 
 .player-body { display: flex; flex-direction: column; gap: 0.5rem; }
 
@@ -326,8 +346,8 @@ section { margin-bottom: 2rem; }
   width: 84%;
 }
 
-.player-title  { font-weight: 500; }
-.player-artist { color: var(--text-soft); font-size: 0.85rem; }
+.player-title  { font-weight: 500; margin: 0; }
+.player-artist { color: var(--text-soft); font-size: 0.85rem; margin: 0; }
 
 .player-toggle {
   flex-shrink: 0;
@@ -366,7 +386,7 @@ section { margin-bottom: 2rem; }
   gap: 74%;
 }
 
-.track-list { list-style: none; margin-top: 0.75rem; }
+.track-list { list-style: none; margin-top: 0.75rem; padding: 0; }
 
 .track-btn {
   width: 100%;
@@ -381,12 +401,13 @@ section { margin-bottom: 2rem; }
   font-size: 0.95rem;
   cursor: pointer;
   text-align: left;
+  font-family: var(--font-body);
 }
 
 .track-btn:hover,
 .track-btn.active { color: var(--accent); }
 
-.track-dur { color: var(--text-soft); font-size: 0.85rem; }
+.track-dur { color: var(--white); font-size: 0.85rem; }
 
 .support { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 3rem; align-items: center; }
 
@@ -397,8 +418,9 @@ section { margin-bottom: 2rem; }
   border-radius: 8px;
   font-weight: 500;
   text-decoration: none;
-  width: 280px;            /* add this */
-  max-width: 100%; 
+  width: 280px;
+  max-width: 100%;
+  font-family: var(--font-body);
 }
 
 .btn-primary { background: var(--accent); color: var(--white); }
@@ -409,58 +431,106 @@ section { margin-bottom: 2rem; }
   border: 1.5px solid var(--accent);
 }
 
-/*Desktop Version*/
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 1.4s ease, transform 1.4s ease;
+}
 
-@media (min-width: 720px) {
-  
-  .page {
-    max-width: 1250px;
-  }
-  
-  section,
-  .site-header { 
-    margin-bottom: 5rem; 
-  }
-  .logo-strip { 
-    aspect-ratio: 7 / 1; 
-  }
-
-  .logo-strip img {
-  width: 75%;
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 
-  .intro {
-  max-width: 75%;
-}
+/* ========================================
+   DESKTOP
+   ======================================== */
 
+@media (min-width: 750px) {
 
-  /* Section 2: row — bandcamp left, icons right, capped + centered */
-  .social-split {
+  /* Desktop: text left, video right */
+  .hero-grid {
     display: flex;
     flex-direction: row;
     align-items: center;
+    padding: 3rem;
+    gap: 3rem;
     justify-content: center;
-    gap: 2.5rem;
-    max-width: 75%;
-    margin: 0 auto;
   }
-  .bandcamp-card { flex: 1; }              /* left */
-  .social-left   { flex: 1; align-self: flex-start; }
-  .social-copy   { text-align: left; }
+
+  .hero-text  { order: 1; }
+  .hero-video { order: 2; }
+
+  /* White container around video on desktop */
   .video-frame {
-    max-width: 75%;
-    margin: 0 auto;        /* centers it */
+    background: var(--dark);
+    border-radius: 5px;
+    padding: 1rem;
+    aspect-ratio: auto;
   }
 
-  .support {
-    align-items: flex-start;
+  .video-frame video {
+    border-radius: 3px;
   }
 
-   .btn {
-    width: 280px;          /* average button length — your knob */
+  .site-header img {
+    max-width: 360px;
   }
 
+  /* Section 2: text+button left, album grid right */
+  .bandcamp {
+    padding: 3rem;
+
+  }
+
+  .bandcamp-text{
+  margin-left: 0%;
+}
+
+  .bandcamp-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+    gap: 3rem;
+
+  }
+
+  .bandcamp-social{
+display: flex;
+flex-direction: column;
+gap: 5rem;
+margin-top: 50px;
+  }
+
+  .bandcamp-social { order: 1; }
+
+  .album-grid {
+    order: 2;
+    width: 100%;
+    max-width: 500px;
+    margin-inline: 0;
+    justify-self: end;
+  }
+
+  .bandcamp-title {
+    font-size: 2.25rem;
+  }
+
+  .bandcamp-copy {
+    font-size: 1.05rem;
+  }
+
+  .social-icons{
+      justify-content: start;
+  }
+
+  .social-icons img {
+    width: 60px;
+    height: 60px;
+  }
+
+  /* Section 3: player left, tracks+buttons right */
   .desktop-split {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -474,15 +544,11 @@ section { margin-bottom: 2rem; }
     gap: 1.5rem;
   }
 
-}
+  .support {
+    align-items: flex-start;
+  }
 
-.reveal {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 1.4s ease, transform 1.4s ease;
-}
-
-.reveal.visible {
-  opacity: 1;
-  transform: translatey(0);
+  .btn {
+    width: 280px;
+  }
 }

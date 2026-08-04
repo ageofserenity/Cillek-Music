@@ -162,3 +162,10 @@ window.addEventListener("load", function () {
   }
   requestAnimationFrame(draw);
 });
+
+document.querySelectorAll('*').forEach(el => {
+  if (el.offsetWidth > document.documentElement.clientWidth) {
+    console.log('Overflowing element:', el);
+    el.style.outline = '2px solid red';
+  }
+});
