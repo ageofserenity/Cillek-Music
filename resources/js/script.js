@@ -99,17 +99,17 @@ const contactForm = document.querySelector(".contact-form");
 
 contactBtn.addEventListener("click", (e) => {
   e.preventDefault();
-  contactOverlay.classList.add("active");
+  contactOverlay.style.display = "flex";
 });
 
 contactClose.addEventListener("click", () => {
-  contactOverlay.classList.remove("active");
+  contactOverlay.style.display = "none";
   resetForm();
 });
 
 contactOverlay.addEventListener("click", (e) => {
   if (e.target === contactOverlay) {
-    contactOverlay.classList.remove("active");
+    contactOverlay.style.display = "none";
     resetForm();
   }
 });
