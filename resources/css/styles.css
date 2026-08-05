@@ -124,7 +124,7 @@ body {
   /* Smooth pink-to-dark gradient — no shape, just a vertical fade */
   background: linear-gradient(
   to bottom,
-  var(--pink),
+  var(--pink) 30%,
   var(--dark)
 );
 }
@@ -135,7 +135,6 @@ body {
    ======================================== */
 
 .hero {
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
@@ -159,12 +158,13 @@ body {
   gap: 2rem;
   background: var(--card);
   padding: 2rem 1.5rem;
+    padding-bottom: 8rem;
   flex: 1;
 }
 
 .hero-title {
   font-family: var(--font-display);
-  font-size: 1.75rem;
+  font-size: 2rem;
   font-weight: 400;
   color: var(--text);
   margin: 0 0 1rem;
@@ -172,7 +172,7 @@ body {
 
 .hero-copy {
   font-family: var(--font-body);
-  font-size: 0.95rem;
+  font-size: 1rem;
   font-weight: 400;
   color: var(--text);
   line-height: 1.7;
@@ -200,7 +200,6 @@ body {
    ======================================== */
 
 .bandcamp {
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   padding: 2rem 1.5rem;
@@ -221,7 +220,7 @@ body {
 
 .bandcamp-title {
   font-family: var(--font-display);
-  font-size: 1.75rem;
+  font-size: 2rem;
   font-weight: 400;
   color: var(--text);
   margin: 0 0 0.75rem;
@@ -229,7 +228,7 @@ body {
 
 .bandcamp-copy {
   font-family: var(--font-body);
-  font-size: 0.95rem;
+  font-size: 1rem;
   font-weight: 400;
   color: var(--text);
   line-height: 1.7;
@@ -241,7 +240,7 @@ body {
   background: var(--card);
   color: var(--text);
   font-family: var(--font-body);
-  font-size: 0.85rem;
+  font-size: 1rem;
   font-weight: 400;
   text-decoration: none;
   padding: 0.5rem 1.5rem;
@@ -293,7 +292,8 @@ body {
   display: flex;
   flex-direction: column;
   padding: 2rem 1.5rem;
-  margin-inline: auto
+  margin-inline: auto;
+  margin-top: 100px;
 }
 
 
@@ -304,16 +304,16 @@ body {
 }
 
 .section-heading {
-  font-family: var(--font-display);
   font-size: 2rem;
-  font-weight: 600;
   color: var(--white);
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
   text-align: center;
+  font-weight: 400;
 }
 
 h2.section-heading{
-  margin-bottom: 50px;
+  margin-bottom: 100px;
+    font-family: var(--font-display);
 }
 
 .player {
@@ -449,25 +449,34 @@ h2.section-heading{
 
 @media (min-width: 750px) {
 
+  p {
+    font-size: clamp(1rem, 2.5vh, 5rem) !important;
+  }
+
+    h1.hero-title{
+      font-size: clamp(1.5rem, 4vw, 2.5rem);
+    }
+
   /* Desktop: text left, video right */
   .hero-grid {
     display: flex;
     flex-direction: row;
     align-items: center;
     padding: 3rem;
+    padding-bottom: 4rem;
     gap: 3rem;
     justify-content: center;
   }
 
-  .hero-text  { order: 1; }
-  .hero-video { order: 2; }
+  .hero-text  { order: 2; }
+  .hero-video { order: 1; }
 
   /* White container around video on desktop */
   .video-frame {
     background: var(--dark);
     border-radius: 5px;
     padding: 1rem;
-    aspect-ratio: auto;
+    max-height: 375px;
   }
 
   .video-frame video {
@@ -476,6 +485,7 @@ h2.section-heading{
 
   .site-header img {
     max-width: 360px;
+    margin-bottom: 50px;
   }
 
   /* Section 2: text+button left, album grid right */
@@ -483,6 +493,14 @@ h2.section-heading{
     padding: 3rem;
     max-width: 1350px;
     margin: auto
+  }
+
+  .bandcamp-title{
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+  }
+
+  .btn-buy{
+    font-size: 17px;
   }
 
   .bandcamp-text{
@@ -513,14 +531,6 @@ margin-top: 50px;
     max-width: 500px;
     margin-inline: 0;
     justify-self: end;
-  }
-
-  .bandcamp-title {
-    font-size: 2.25rem;
-  }
-
-  .bandcamp-copy {
-    font-size: 1.05rem;
   }
 
   .social-icons{
