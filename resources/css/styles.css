@@ -481,7 +481,8 @@ h2.section-heading{
   /* Section 2: text+button left, album grid right */
   .bandcamp {
     padding: 3rem;
-
+    max-width: 1350px;
+    margin: auto
   }
 
   .bandcamp-text{
@@ -493,6 +494,7 @@ h2.section-heading{
     grid-template-columns: 1fr 1fr;
     align-items: start;
     gap: 3rem;
+    place-items: center;
 
   }
 
