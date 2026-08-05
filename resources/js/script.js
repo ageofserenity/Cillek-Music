@@ -91,6 +91,70 @@ progress.addEventListener("click", (e) => {
 loadTrack(0);
 
 
+// --- Contact overlay ---
+const contactBtn = document.getElementById("contactBtn");
+const contactOverlay = document.getElementById("contactOverlay");
+const contactClose = document.getElementById("contactClose");
+const contactForm = document.querySelector(".contact-form");
+
+contactBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  contactOverlay.classList.add("active");
+});
+
+contactClose.addEventListener("click", () => {
+  contactOverlay.classList.remove("active");
+  resetForm();
+});
+
+contactOverlay.addEventListener("click", (e) => {
+  if (e.target === contactOverlay) {
+    contactOverlay.classList.remove("active");
+    resetForm();
+  }
+});
+
+contactForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const submitBtn = contactForm.querySelector("button[type='submit']");
+  submitBtn.textContent = "Sending...";
+  submitBtn.disabled = true;
+
+  try {
+    const res = await fetch(contactForm.action, {
+      method: "POST",
+      body: new FormData(contactForm),
+      headers: { "Accept": "application/json" }
+    });
+
+    if (res.ok) {
+      contactForm.innerHTML = '<p class="form-success">Message sent! We\'ll get back to you soon.</p>';
+    } else {
+      submitBtn.textContent = "Send";
+      submitBtn.disabled = false;
+      alert("Something went wrong. Please try again.");
+    }
+  } catch {
+    submitBtn.textContent = "Send";
+    submitBtn.disabled = false;
+    alert("Something went wrong. Please try again.");
+  }
+});
+
+function resetForm() {
+  const success = contactForm.querySelector(".form-success");
+  if (success) {
+    contactForm.innerHTML = `
+      <input type="text" name="name" placeholder="Name" required>
+      <input type="email" name="email" placeholder="Email" required>
+      <input type="text" name="subject" placeholder="Subject" required>
+      <textarea name="message" placeholder="Message" rows="5" required></textarea>
+      <button type="submit" class="btn btn-primary">Send</button>
+    `;
+  }
+}
+
+
 // --- Scroll reveal (fade-in-up as sections enter view) ---
 const revealEls = document.querySelectorAll(".reveal");
 const revealObserver = new IntersectionObserver((entries) => {
