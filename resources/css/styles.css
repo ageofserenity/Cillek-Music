@@ -123,10 +123,10 @@ body {
 
   /* Smooth pink-to-dark gradient — no shape, just a vertical fade */
   background: linear-gradient(
-    to bottom,
-    var(--pink),
-    var(--dark)
-  ) fixed;
+  to bottom,
+  var(--pink),
+  var(--dark)
+);
 }
 
 
